@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/values/CustomColors.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -20,7 +21,8 @@ class _LoginScreenState extends State<LoginScreen> {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              topColor,
+              CustomColors().getGradientMainColor(),
+              CustomColors().getGradientSeconColor(),
               bottomColor,
             ],
           ),
@@ -115,8 +117,62 @@ class _LoginScreenState extends State<LoginScreen> {
                   textAlign: TextAlign.center,
                 ),
               ),
+              Padding(
+                padding: EdgeInsets.only(bottom: 10),
+              ),
               Row(
-                children: [Checkbox(value: value, onChanged: onChanged)],
+                children: [
+                  Checkbox(
+                    value: this.continueConected,
+                    onChanged: (bool? newValue) {
+                      setState(() {
+                        this.continueConected = newValue!;
+                      });
+                    },
+                  ),
+                  Text(
+                    "Continuar conectado ?",
+                    style: TextStyle(color: Colors.white),
+                  )
+                ],
+              ),
+              RaisedButton(
+                onPressed: () {},
+                child: Text(
+                  "Login",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+                color: CustomColors().getActivePrimaryButtonColor(),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30)),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 10),
+                child: Divider(
+                  color: Colors.black,
+                ),
+              ),
+              Text(
+                "Ainda não tem uma conta ?",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 11),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 10),
+                child: RaisedButton(
+                  onPressed: () {},
+                  child: Text(
+                    "Cadastre-se",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  color: CustomColors().getActiveSecondaryButton(),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30)),
+                ),
               )
             ],
           ),
