@@ -1,6 +1,7 @@
 # gym_app
 
 A new Flutter project.
+App para melhor gerenciamento de academias.
 
 ## Getting Started
 
