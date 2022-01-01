@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/screens/sign_up_screen.dart';
 import 'package:gym_app/values/CustomColors.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -162,7 +163,14 @@ class _LoginScreenState extends State<LoginScreen> {
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 10),
                 child: RaisedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SignUpScreen(),
+                      ),
+                    );
+                  },
                   child: Text(
                     "Cadastre-se",
                     style: TextStyle(

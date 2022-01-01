@@ -145,7 +145,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ],
                     ),
                     RaisedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                       child: Text(
                         "Cadastre-se",
                         style: TextStyle(
