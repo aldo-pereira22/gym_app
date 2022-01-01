@@ -7,7 +7,7 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  bool showPressed = false;
+  bool showPassword = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,7 +71,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ),
                     TextFormField(
-                      obscureText: true,
+                      obscureText: (this.showPassword == true) ? false : true,
                       decoration: InputDecoration(
                         labelText: "Senha",
                         labelStyle: TextStyle(
@@ -98,41 +98,43 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       ),
                     ),
-                    TextFormField(
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        labelText: "Confirme a senha Senha",
-                        labelStyle: TextStyle(
-                          color: Colors.white,
-                        ),
-                        prefixIcon: Icon(
-                          Icons.vpn_key_sharp,
-                          color: Colors.white,
-                        ),
-                        border: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.white,
-                          ),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.white,
-                          ),
-                        ),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
+                    (this.showPassword == false)
+                        ? TextFormField(
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              labelText: "Confirme a senha Senha",
+                              labelStyle: TextStyle(
+                                color: Colors.white,
+                              ),
+                              prefixIcon: Icon(
+                                Icons.vpn_key_sharp,
+                                color: Colors.white,
+                              ),
+                              border: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                ),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                ),
+                              ),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          )
+                        : Container(),
                     Row(
                       children: [
                         Checkbox(
-                          value: this.showPressed,
+                          value: this.showPassword,
                           onChanged: (bool? newValue) {
                             setState(() {
-                              this.showPressed = newValue!;
+                              this.showPassword = newValue!;
                             });
                           },
                         ),
