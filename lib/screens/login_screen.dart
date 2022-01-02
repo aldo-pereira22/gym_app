@@ -206,16 +206,30 @@ class _LoginScreenState extends State<LoginScreen> {
     String passwordForm = this._passwordInputController.text;
 
     User savedUser = await _getSavedUser();
-    print(savedUser);
+
+    if (mailForm == savedUser.email && passwordForm == savedUser.password) {
+      print('LOGIN EFETUADO COM SUCESSO');
+    } else {
+      print(("Falha ao locar"));
+    }
   }
 
+  // Future<User> _getSavedUser() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   String jsonUser = prefs.getString(PreferencesKey.activeUser);
+  //   print(jsonUser);
+
+  //   Map<String, dynamic> mapUser = jsonDecode(jsonUser);
+
+  //   User user = User.fromJson(mapUser);
+  //   return user;
+  // }
   Future<User> _getSavedUser() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String jsonUser = prefs.getString(PreferencesKey.activeUser);
+    String? jsonUser = prefs.getString(PreferencesKey.activeUser);
     print(jsonUser);
 
-    Map<String, dynamic> mapUser = jsonDecode(jsonUser);
-
+    Map<String, dynamic> mapUser = json.decode(jsonUser!);
     User user = User.fromJson(mapUser);
     return user;
   }
