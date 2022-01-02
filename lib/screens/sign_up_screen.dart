@@ -1,5 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:gym_app/models/user.dart';
 import 'package:gym_app/values/CustomColors.dart';
+import 'package:gym_app/values/preferences_keys.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -7,6 +12,11 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  TextEditingController _nameInputController = TextEditingController();
+  TextEditingController _mailInputController = TextEditingController();
+  TextEditingController _passwordInputController = TextEditingController();
+  TextEditingController _confirmInputController = TextEditingController();
+
   bool showPassword = false;
   @override
   Widget build(BuildContext context) {
@@ -35,6 +45,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 child: Column(
                   children: [
                     TextFormField(
+                      controller: _nameInputController,
                       autofocus: true,
                       decoration: InputDecoration(
                         labelText: "Nome completo",
@@ -53,6 +64,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ),
                     TextFormField(
+                      controller: _mailInputController,
                       autofocus: true,
                       decoration: InputDecoration(
                         labelText: "E-mail",
@@ -71,6 +83,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ),
                     TextFormField(
+                      controller: _passwordInputController,
                       obscureText: (this.showPassword == true) ? false : true,
                       decoration: InputDecoration(
                         labelText: "Senha",
@@ -100,6 +113,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     (this.showPassword == false)
                         ? TextFormField(
+                            controller: _confirmInputController,
                             obscureText: true,
                             decoration: InputDecoration(
                               labelText: "Confirme a senha Senha",
@@ -146,6 +160,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     RaisedButton(
                       onPressed: () {
+                        _doSignUp();
                         Navigator.pop(context);
                       },
                       child: Text(
@@ -166,5 +181,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
       ),
     );
+  }
+
+  void _doSignUp() {
+    User newUser = User(
+        name: _nameInputController.text,
+        email: _mailInputController.text,
+        password: _passwordInputController.text,
+        keepOn: true);
+
+    print(newUser);
+    _saveUser(newUser);
+  }
+
+  void _saveUser(User user) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(PreferencesKey.activeUser, json.encode(user.toJson()));
   }
 }

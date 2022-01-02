@@ -1,6 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:gym_app/models/user.dart';
 import 'package:gym_app/screens/sign_up_screen.dart';
 import 'package:gym_app/values/CustomColors.dart';
+import 'package:gym_app/values/preferences_keys.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -8,6 +13,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController _mailInputController = TextEditingController();
+  TextEditingController _passwordInputController = TextEditingController();
+
   Color topColor = Colors.blue;
   Color bottomColor = Color.fromARGB(255, 212, 247, 255);
   bool continueConected = false;
@@ -55,6 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   children: [
                     TextFormField(
+                      controller: _mailInputController,
                       autofocus: true,
                       decoration: InputDecoration(
                         labelText: "E-mail",
@@ -73,6 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     TextFormField(
+                      controller: _passwordInputController,
                       decoration: InputDecoration(
                         labelText: "Senha",
                         labelStyle: TextStyle(
@@ -138,7 +148,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 ],
               ),
               RaisedButton(
-                onPressed: () {},
+                onPressed: () {
+                  _doLogin();
+                },
                 child: Text(
                   "Login",
                   style: TextStyle(
@@ -187,5 +199,24 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  void _doLogin() async {
+    String mailForm = this._mailInputController.text;
+    String passwordForm = this._passwordInputController.text;
+
+    User savedUser = await _getSavedUser();
+    print(savedUser);
+  }
+
+  Future<User> _getSavedUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String jsonUser = prefs.getString(PreferencesKey.activeUser);
+    print(jsonUser);
+
+    Map<String, dynamic> mapUser = jsonDecode(jsonUser);
+
+    User user = User.fromJson(mapUser);
+    return user;
   }
 }
