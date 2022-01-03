@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gym_app/screens/login_screen.dart';
-import 'package:gym_app/screens/sign_up_screen.dart';
+import 'package:gym_app/pages/login/login_screen.dart';
 
 void main() {
   runApp(MyApp());

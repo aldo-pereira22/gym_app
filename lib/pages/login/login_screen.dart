@@ -1,10 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:gym_app/models/user.dart';
-import 'package:gym_app/screens/sign_up_screen.dart';
-import 'package:gym_app/values/CustomColors.dart';
-import 'package:gym_app/values/preferences_keys.dart';
+import 'package:gym_app/shareds/constants/CustomColors.dart';
+import 'package:gym_app/shareds/constants/preferences_keys.dart';
+import 'package:gym_app/shareds/models/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -147,7 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   )
                 ],
               ),
-              RaisedButton(
+              ElevatedButton(
                 onPressed: () {
                   _doLogin();
                 },
@@ -157,9 +156,20 @@ class _LoginScreenState extends State<LoginScreen> {
                     color: Colors.white,
                   ),
                 ),
-                color: CustomColors().getActivePrimaryButtonColor(),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30)),
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                    CustomColors().getActivePrimaryButtonColor(),
+                  ),
+                  shape: MaterialStateProperty.all<OutlinedBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                  ),
+                ),
+
+                // color: CustomColors().getActivePrimaryButtonColor(),
+                // shape: RoundedRectangleBorder(
+                //     borderRadius: BorderRadius.circular(30)),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 10),

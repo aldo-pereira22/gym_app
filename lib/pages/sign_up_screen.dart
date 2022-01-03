@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:gym_app/models/user.dart';
-import 'package:gym_app/values/CustomColors.dart';
-import 'package:gym_app/values/preferences_keys.dart';
+import 'package:gym_app/shareds/constants/CustomColors.dart';
+import 'package:gym_app/shareds/constants/preferences_keys.dart';
+import 'package:gym_app/shareds/models/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUpScreen extends StatefulWidget {
