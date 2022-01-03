@@ -1,16 +1,16 @@
-class User {
+class LoginModel {
   String? name;
   String? email;
   String? password;
   bool? keepOn;
 
-  User(
+  LoginModel(
       {required this.name,
       required this.email,
       required this.password,
       required this.keepOn});
 
-  User.fromJson(Map<String, dynamic> json) {
+  LoginModel.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     email = json['email'];
     password = json['password'];

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gym_app/pages/login/login_screen.dart';
+import 'package:gym_app/pages/login/login_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Gym APPPPPP',
-      home: LoginScreen(),
+      home: LoginPage(),
     );
   }
 }

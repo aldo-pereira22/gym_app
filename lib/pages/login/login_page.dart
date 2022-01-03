@@ -3,15 +3,17 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:gym_app/shareds/constants/CustomColors.dart';
 import 'package:gym_app/shareds/constants/preferences_keys.dart';
-import 'package:gym_app/shareds/models/user.dart';
+import 'package:gym_app/shareds/models/login_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginScreen extends StatefulWidget {
+import '../sign_up_screen.dart';
+
+class LoginPage extends StatefulWidget {
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginPageState extends State<LoginPage> {
   TextEditingController _mailInputController = TextEditingController();
   TextEditingController _passwordInputController = TextEditingController();
 
@@ -184,12 +186,13 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 10),
+                // ignore: deprecated_member_use
                 child: RaisedButton(
                   onPressed: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => SignUpScreen(),
+                        builder: (context) => SiginUpPage(),
                       ),
                     );
                   },
@@ -215,7 +218,7 @@ class _LoginScreenState extends State<LoginScreen> {
     String mailForm = this._mailInputController.text;
     String passwordForm = this._passwordInputController.text;
 
-    User savedUser = await _getSavedUser();
+    LoginModel savedUser = await _getSavedUser();
 
     if (mailForm == savedUser.email && passwordForm == savedUser.password) {
       print('LOGIN EFETUADO COM SUCESSO');
@@ -234,13 +237,13 @@ class _LoginScreenState extends State<LoginScreen> {
   //   User user = User.fromJson(mapUser);
   //   return user;
   // }
-  Future<User> _getSavedUser() async {
+  Future<LoginModel> _getSavedUser() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? jsonUser = prefs.getString(PreferencesKey.activeUser);
     print(jsonUser);
 
     Map<String, dynamic> mapUser = json.decode(jsonUser!);
-    User user = User.fromJson(mapUser);
+    LoginModel user = LoginModel.fromJson(mapUser);
     return user;
   }
 }

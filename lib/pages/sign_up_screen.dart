@@ -3,15 +3,15 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:gym_app/shareds/constants/CustomColors.dart';
 import 'package:gym_app/shareds/constants/preferences_keys.dart';
-import 'package:gym_app/shareds/models/user.dart';
+import 'package:gym_app/shareds/models/login_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SignUpScreen extends StatefulWidget {
+class SiginUpPage extends StatefulWidget {
   @override
-  _SignUpScreenState createState() => _SignUpScreenState();
+  _SiginUpPageState createState() => _SiginUpPageState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _SiginUpPageState extends State<SiginUpPage> {
   TextEditingController _nameInputController = TextEditingController();
   TextEditingController _mailInputController = TextEditingController();
   TextEditingController _passwordInputController = TextEditingController();
@@ -184,7 +184,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void _doSignUp() {
-    User newUser = User(
+    LoginModel newUser = LoginModel(
         name: _nameInputController.text,
         email: _mailInputController.text,
         password: _passwordInputController.text,
@@ -194,7 +194,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _saveUser(newUser);
   }
 
-  void _saveUser(User user) async {
+  void _saveUser(LoginModel user) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(PreferencesKey.activeUser, json.encode(user.toJson()));
   }
